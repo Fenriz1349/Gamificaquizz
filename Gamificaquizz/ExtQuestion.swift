@@ -12,7 +12,7 @@ struct ExtQuestion : View {
     let question : Question
     @Binding var QReturn :Int
     var body: some View {
-        Text("\(question.number)/5 : \(question.topic)")
+        Text("\(question.number)/\(questionsQuizz.count) : \(question.topic)")
         Picker("", selection: $QReturn){
             Text("A: "+question.proposition1).tag(1)
             Text("B: "+question.proposition2).tag(2)

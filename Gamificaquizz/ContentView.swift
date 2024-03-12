@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     //    variables pour stocker la reponse selctionner
-    @State var questionReturn : [Int] = [0,0,0,0,0]
+    @State var questionReturn : [Int] = [0,0,0,0,0,0,0,0]
     @State var nbGoodAnswers : Int = 0
     @State var currentQuestion : Int = 0
     @State var nbPointEarned : Int = 0
@@ -33,19 +33,19 @@ struct ContentView: View {
                                 nbGoodAnswers+=1
                                 nbPointEarned+=quizz.questions[currentQuestion].points
                             }
-                            currentQuestion<4 ? currentQuestion+=1 : showingModalQuizz.toggle()
+                            currentQuestion<questionsQuizz.count-1 ? currentQuestion+=1 : showingModalQuizz.toggle()
                             
                         }
                     label:{HStack{
-                        Text(currentQuestion<4 ? "Suivant   " : "Valider")
-                        Image(systemName: currentQuestion<4 ? "chevron.forward" : "")} }
+                        Text(currentQuestion<questionsQuizz.count-1 ? "Suivant   " : "Valider")
+                        Image(systemName: currentQuestion<questionsQuizz.count ? "chevron.forward" : "")} }
                     .buttonStyle(GrowingButton())
                     .sheet(isPresented: $showingModalQuizz) {
-                        QuizzResultScreen(nbGoodAnswers :$nbGoodAnswers, nbPointEarned: $nbPointEarned,currentQuestion : $currentQuestion)
+                        QuizzResultScreen(nbGoodAnswers :$nbGoodAnswers, nbPointEarned: $nbPointEarned)
                     }
                     }
                     Text("bonne reponses : \(nbGoodAnswers) / \(currentQuestion)")
-                    Text("vous avez marqué \(nbPointEarned)")
+//                    Text("vous avez marqué \(nbPointEarned)")
                 }
             }
         }.padding()
