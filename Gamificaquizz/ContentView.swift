@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     //    variables pour stocker la reponse selctionner
-    @State var questionReturn : [Int] = [0,0,0,0,0,0,0,0]
+    @State var questionReturn : [Int] = Array(repeating: 0, count: questionsQuizz.count)
     @State var nbGoodAnswers : Int = 0
     @State var currentQuestion : Int = 0
     @State var nbPointEarned : Int = 0
@@ -29,7 +29,7 @@ struct ContentView: View {
                     }
                     HStack{
                         Button(){
-                            if questionReturn[currentQuestion] == quizz.questions[currentQuestion].validProposition {
+                            if quizz.questions[currentQuestion].validProposition.contains(questionReturn[currentQuestion]) {
                                 nbGoodAnswers+=1
                                 nbPointEarned+=quizz.questions[currentQuestion].points
                             }
@@ -38,10 +38,10 @@ struct ContentView: View {
                         }
                     label:{HStack{
                         Text(currentQuestion<questionsQuizz.count-1 ? "Suivant   " : "Valider")
-                        Image(systemName: currentQuestion<questionsQuizz.count ? "chevron.forward" : "")} }
+                        Image(systemName: currentQuestion<questionsQuizz.count-1 ? "chevron.forward" : "")} }
                     .buttonStyle(GrowingButton())
                     .sheet(isPresented: $showingModalQuizz) {
-                        QuizzResultScreen(nbGoodAnswers :$nbGoodAnswers, nbPointEarned: $nbPointEarned)
+                        QuizzResultScreen(nbGoodAnswers :$nbGoodAnswers, nbPointEarned: $nbPointEarned, currentQuestion: $currentQuestion)
                     }
                     }
                     Text("bonne reponses : \(nbGoodAnswers) / \(currentQuestion)")

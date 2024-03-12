@@ -11,6 +11,7 @@ struct QuizzResultScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var nbGoodAnswers : Int
     @Binding var nbPointEarned : Int
+    @Binding var currentQuestion : Int
     var body: some View {
         NavigationStack{
             VStack {
@@ -21,6 +22,7 @@ struct QuizzResultScreen: View {
                 Button {
                     nbGoodAnswers = 0
                     nbPointEarned = 0
+                    currentQuestion = 0
                     presentationMode.wrappedValue.dismiss()
                     }label:{HStack{
                         Image(systemName: "chevron.backward")
@@ -38,5 +40,5 @@ struct QuizzResultScreen: View {
 }
 
 #Preview {
-    QuizzResultScreen(nbGoodAnswers: .constant(0), nbPointEarned: .constant(0))
+    QuizzResultScreen(nbGoodAnswers: .constant(0), nbPointEarned: .constant(0),currentQuestion: .constant(0))
 }
