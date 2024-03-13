@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    //    variables pour stocker la reponse selctionner
+    //    variables pour stocker la reponse selctionnée
     @State var questionReturn : [Int] = Array(repeating: 0, count: questionsQuizz.count)
     @State var nbGoodAnswers : Int = 0
     @State var currentQuestion : Int = 0
@@ -23,10 +23,10 @@ struct ContentView: View {
                 VStack{
                     Text(quizz.name)
                         .modifier(TitleFontStyle())
-                    Form{
+                    Spacer()
                         ExtQuestion(question: quizz.questions[currentQuestion], QReturn: $questionReturn[currentQuestion])
                             .padding(5)
-                    }
+                    Spacer()
                     HStack{
                         Button(){
                             if quizz.questions[currentQuestion].validProposition.contains(questionReturn[currentQuestion]) {
@@ -45,7 +45,6 @@ struct ContentView: View {
                     }
                     }
                     Text("bonne reponses : \(nbGoodAnswers) / \(currentQuestion)")
-//                    Text("vous avez marqué \(nbPointEarned)")
                 }
             }
         }.padding()
